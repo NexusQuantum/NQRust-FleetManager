@@ -202,7 +202,7 @@
     "cypress-axe": "1.6.0",
     "cypress-delete-downloads-folder": "0.0.4",
     "cypress-mochawesome-reporter": "3.8.2",
-    "cypress-multi-reporters": "1.6.4",
+    "cypress-multi-reporters": "2.0.5",
     "cypress-qase-reporter": "3.0.0",
     "cypress-real-events": "1.14.0",
     "cypress-terminal-report": "7.2.0",
