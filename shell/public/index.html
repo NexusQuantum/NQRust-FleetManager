@@ -6,7 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
-    <title>Rancher</title>
+    <meta name="theme-color" content="#0a0a0a">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,300..700,0..1,-25..0&display=swap">
+    <title>NQRust Fleet Manager</title>
 </head>
 
 <body>
@@ -29,7 +33,7 @@
                 // Otherwise user selected light/dark theme directly
                 document.cookie.includes('R_THEME=dark');
 
-            const color = isDark ? '#1b1c21' : '#FFF';
+            const color = isDark ? '#0a0a0a' : '#FFFFFF';
             const style = document.createElement('style');
             style.innerHTML = ':root { --loading-bg-color: ' + color + ';}';
             document.getElementsByTagName('head')[0].prepend(style);
@@ -49,16 +53,16 @@
         }
 
         .initial-load-spinner {
-            animation: initial-load-animate 1s infinite linear;
+            animation: initial-load-animate 0.8s infinite linear;
             background-color: var(--loading-bg-color);
             box-sizing: border-box;
-            border: 5px solid #008ACF;
+            border: 2px solid rgba(127, 127, 127, 0.25);
             border-radius: 50%;
-            border-top-color: #00B2E2;
+            border-top-color: rgba(127, 127, 127, 1);
             display: inline-block;
-            height: 80px;
+            height: 56px;
             margin: 0 auto;
-            width: 80px;
+            width: 56px;
         }
 
         @keyframes initial-load-animate {

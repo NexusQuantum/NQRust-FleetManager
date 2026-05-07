@@ -1,38 +1,122 @@
-# Rancher Dashboard
-Rancher Dashboard is the UI that powers [Rancher](https://www.rancher.com/products/rancher).
+<div align="center">
 
-Rancher Dashboard supports an extension mechanism that allows developers to independently provide additional functionality to Rancher. You can learn more from our [Rancher Extensions Docs](https://extensions.rancher.io).
+# NQRust Fleet Manager
 
-# What is it?
+**A monochrome, brutalist control plane for Kubernetes — built on top of the [Rancher Dashboard](https://github.com/rancher/dashboard).**
 
-Rancher Dashboard provides a sophisticated UI for managing Kubernetes clusters and Workloads.
+[![License](https://img.shields.io/badge/license-Apache%202.0-262626?style=flat-square)](./LICENSE)
+[![Vue](https://img.shields.io/badge/Vue-3-262626?style=flat-square)](https://vuejs.org/)
+[![Made by NexusQuantum](https://img.shields.io/badge/made%20by-NexusQuantum-FF621B?style=flat-square)](https://github.com/NexusQuantum)
 
-<img src="docusaurus/docs/internal/getting-started/screenshots/home.png" />
+<br>
 
-## Internal Developer Docs
+<img src="docs/showcase/login.png" alt="NQRust Fleet Manager — login screen" width="100%">
 
-These docs are intended only for Dashboard UI developers.
+</div>
 
-If you're building extensions, please see: https://extensions.rancher.io.
+---
 
-For internal documentation, see [Rancher UI Internal Documentation](https://extensions.rancher.io/internal/docs).
+## What it is
 
-## Contributing
+NQRust Fleet Manager is a UI fork of the SUSE Rancher Dashboard, reskinned end-to-end for high-density, systems-level workflows. It speaks to any Rancher backend without modification — same Steve API, same auth, same extension surface — and ships:
 
-We welcome external contributions - please refer to the internal documentation above.
+- A neutral OKLCH grayscale palette with **`#FF621B`** as the brand accent
+- A shadcn-flavored density layer (38 px inputs, 36 px buttons, 1 px borders, focus rings)
+- Google Material Symbols Outlined as the icon font (replacing the bespoke Rancher icon set)
+- The full NQRust brand identity (logo, favicons, splash, banners, login landscape) in light + dark
+- Original architecture untouched: Vue 3 / Composition API / TypeScript / SCSS, the upstream Vuex store, the BrandImage system, all theme switching plumbing
 
-License
-=======
-Copyright (c) 2014-2026 [SUSE](https://www.suse.com)
+If you're looking for a clean, opinionated Rancher reskin that you can point at your existing rancher backend and ship today — this is that.
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+---
 
-[http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0)
+## Showcase
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+<table>
+  <tr>
+    <td align="center"><strong>Home</strong></td>
+    <td align="center"><strong>Cluster</strong></td>
+  </tr>
+  <tr>
+    <td><img src="docs/showcase/home.png" alt="Home dashboard" width="100%"></td>
+    <td><img src="docs/showcase/cluster.png" alt="Cluster view" width="100%"></td>
+  </tr>
+</table>
+
+---
+
+## Quick start
+
+NQRust Fleet Manager is the UI only. You need a running Rancher backend to point it at — any version that the upstream dashboard supports works.
+
+```bash
+# 1. install deps
+yarn install --frozen-lockfile
+
+# 2. run the dev server against your Rancher
+API=https://your-rancher-server yarn dev
+
+# UI lives at https://127.0.0.1:8005
+```
+
+For a local-only sandbox you can spin up Rancher in Docker:
+
+```bash
+docker run -d --restart=unless-stopped \
+  --name nqrust-rancher --privileged \
+  -p 127.0.0.1:80:80 -p 127.0.0.1:443:443 \
+  rancher/rancher:latest
+
+# Read the bootstrap password
+docker logs nqrust-rancher 2>&1 | grep "Bootstrap Password"
+
+# Then in another terminal
+API=https://localhost yarn dev
+```
+
+---
+
+## Build
+
+```bash
+yarn build           # production bundle
+yarn lint            # ESLint
+yarn test:ci         # Jest unit tests
+yarn cy:run          # Cypress e2e
+```
+
+---
+
+## Architecture notes
+
+The reskin is a single cascade-final SCSS overlay (`shell/assets/styles/themes/_nqrust.scss`) plus a Material Symbols icon override (`shell/assets/styles/themes/_nqrust-icons.scss`) — both imported last in `app.scss` so they win the cascade without touching any upstream theme file.
+
+The brand is delivered through:
+- `shell/assets/images/pl/` — light + dark logo, banner, login landscape (with embedded `Logo.png`)
+- `shell/assets/brand/suse/` — overrides the default brand variant so existing brand-switching logic continues to work
+- `shell/static/favicon.{ico,png}` — favicons
+- `shell/config/private-label.js` — vendor name / product name constants
+- `shell/components/Cluster*.vue` — local-cluster icon (replaced with the NQRust fleet-stack mark)
+- `shell/assets/translations/en-us.yaml` — UI strings for vendor-facing labels
+
+No backend bindings, Vuex stores, route definitions, API URLs, CRD references, or extension hooks were modified.
+
+---
+
+## Attribution
+
+This project is a fork of [`rancher/dashboard`](https://github.com/rancher/dashboard) (Apache License 2.0, © Rancher Labs / SUSE). All upstream copyright notices remain in place. NQRust branding, theme system, and the customizations on top of the fork are © NexusQuantum, also released under Apache 2.0 — see [`NOTICE.md`](./NOTICE.md) for the breakdown.
+
+To pull future Rancher Dashboard updates into this fork:
+
+```bash
+git remote add upstream https://github.com/rancher/dashboard.git
+git fetch upstream
+git merge upstream/master
+```
+
+---
+
+## License
+
+Apache License 2.0. See [`LICENSE`](./LICENSE).

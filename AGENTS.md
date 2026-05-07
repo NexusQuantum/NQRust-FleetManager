@@ -2,7 +2,7 @@
 
 # Project Overview
 
-Rancher Dashboard is the user interface for Rancher, built using Vue.js and TypeScript. It interacts with the Rancher API to manage Kubernetes clusters.
+NQRust Fleet Manager is a Vue.js + TypeScript UI for managing Kubernetes clusters via a Rancher backend. It is a UI fork of [`rancher/dashboard`](https://github.com/rancher/dashboard) with a monochrome OKLCH theme, `#FF621B` brand accent, shadcn-style density, and Material Symbols Outlined as the icon font. The fork preserves the upstream architecture entirely — all reskin overrides live in cascade-final SCSS overlays at `shell/assets/styles/themes/_nqrust.scss` and `_nqrust-icons.scss`. No backend bindings, Vuex stores, or extension contracts were modified.
 
 # Personas
 

@@ -33,3 +33,9 @@
 
 @import "./vendor/vue-select";
 @import "./vendor/code-mirror";
+
+// NQRust Fleet Manager monochrome reskin — MUST be last so it wins the cascade
+@import "./themes/nqrust";
+
+// NQRust Material Symbols icon override — MUST be after _nqrust.scss
+@import "./themes/nqrust-icons";

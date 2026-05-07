@@ -1,0 +1,1232 @@
+// =============================================================================
+// NQRust Fleet Manager — neutral shadcn shell + orange brand accent
+// -----------------------------------------------------------------------------
+// Surfaces / borders / text stay on the strict NQRust OKLCH neutral palette.
+// The brand accent (#FF621B ≈ oklch(0.685 0.196 38), pulled directly from the
+// NQRust Logo.png) drives interactive primary surfaces: --primary, --ring,
+// active nav state, focus indicators, link emphasis. Everything else stays
+// neutral so the orange always reads as deliberate, not decorative.
+//
+// Loaded LAST in app.scss so the cascade beats _modern.scss / _light.scss /
+// _dark.scss / brand themes without touching them.
+// =============================================================================
+
+// Brand accent — directly extracted from the NQRust logo
+$nq-brand:        oklch(0.685 0.196 38);    // #FF621B — primary brand orange
+$nq-brand-hover:  oklch(0.62 0.196 38);     // pressed / hover
+$nq-brand-active: oklch(0.55 0.196 38);     // pressed darkest
+$nq-brand-soft:   oklch(0.97 0.05 38);      // banner / tinted bg
+$nq-brand-fg:     oklch(0.985 0 0);         // text on brand surfaces
+
+// -----------------------------------------------------------------------------
+// LIGHT — `:root` ships the canonical NQRust shadcn token set so new components
+// can author with `var(--background)`, `var(--foreground)` etc. directly.
+// All Rancher legacy tokens are then remapped to draw from the same palette.
+// -----------------------------------------------------------------------------
+:root,
+BODY,
+BODY.theme-light,
+.theme-light,
+.classic.theme-light,
+.suse.theme-light,
+.csp.theme-light,
+.federal.theme-light,
+.rgs.theme-light,
+.harvester.theme-light {
+  // ---------- Pure shadcn / NQRust tokens ----------
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: #{$nq-brand};
+  --primary-foreground: #{$nq-brand-fg};
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  // --muted is consumed BOTH ways: shadcn convention treats it as a bg fill,
+  // but Rancher's .text-muted / .text-deemphasized bind `color` to var(--muted)
+  // directly. Rancher wins here — keep this a readable text-grade gray.
+  --muted: oklch(0.439 0 0);
+  --muted-foreground: oklch(0.439 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: #{$nq-brand};
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: #{$nq-brand};
+  --sidebar-primary-foreground: #{$nq-brand-fg};
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: #{$nq-brand};
+
+  // ---------- Rancher legacy → NQRust accent + neutral remap ----------
+  --primary-text: #{$nq-brand-fg};
+  --primary-hover-bg: #{$nq-brand-hover};
+  --primary-hover-text: #{$nq-brand-fg};
+  --primary-active-bg: #{$nq-brand-active};
+  --primary-active-text: #{$nq-brand-fg};
+  --primary-border: #{$nq-brand};
+  --primary-banner-bg: #{$nq-brand-soft};
+  --primary-light-bg: #{$nq-brand-soft};
+  --primary-keyboard-focus: #{$nq-brand-active};
+
+  --non-primary-hover: oklch(0.97 0 0);
+  --non-primary-text: #{$nq-brand};
+
+  --secondary-border: oklch(0.922 0 0);
+  --on-secondary: oklch(0.205 0 0);
+  --secondary-hover: oklch(0.97 0 0);
+
+  --tertiary: transparent;
+  --tertiary-header: transparent;
+  --tertiary-border: transparent;
+  --tertiary-header-hover: oklch(0.97 0 0);
+  --on-tertiary: oklch(0.205 0 0);
+  --on-tertiary-header: oklch(0.205 0 0);
+  --on-tertiary-header-hover: oklch(0.205 0 0);
+  --on-tertiary-hover: oklch(0.205 0 0);
+  --tertiary-hover: oklch(0.97 0 0);
+  --tertiary-hover-app-bar: oklch(0.205 0 0);
+
+  --link: #{$nq-brand};
+  --link-text: #{$nq-brand-fg};
+  --link-text-secondary: oklch(0.556 0 0);
+  --link-hover-bg: #{$nq-brand-hover};
+  --link-hover-text: #{$nq-brand-fg};
+  --link-active-bg: #{$nq-brand-active};
+  --link-active-text: #{$nq-brand-fg};
+  --link-border: #{$nq-brand};
+  --link-banner-bg: #{$nq-brand-soft};
+  --link-light-bg: #{$nq-brand-soft};
+
+  --active: #{$nq-brand};
+  --active-nav: #{$nq-brand};
+  --on-active: #{$nq-brand-fg};
+  --active-hover: #{$nq-brand-hover};
+  --category-active: #{$nq-brand-soft};
+  --category-active-hover: oklch(0.94 0.06 38);
+
+  --toggle-on-bg: #{$nq-brand};
+  --toggle-on-color: #{$nq-brand-fg};
+  --toggle-off-bg: oklch(0.97 0 0);
+  --toggle-off-color: oklch(0.556 0 0);
+  --toggle-off-hover: oklch(0.922 0 0);
+
+  --default: oklch(0.97 0 0);
+  --default-text: oklch(0.205 0 0);
+  --default-hover-bg: oklch(0.922 0 0);
+  --default-hover-text: oklch(0.205 0 0);
+  --default-active-bg: oklch(0.922 0 0);
+  --default-active-text: oklch(0.145 0 0);
+  --default-border: oklch(0.922 0 0);
+  --default-banner-bg: oklch(0.97 0 0);
+  --default-light-bg: oklch(0.985 0 0);
+
+  --muted: oklch(0.439 0 0);
+  --deemphasized: oklch(0.439 0 0);
+
+  --darker: oklch(0.205 0 0);
+  --darker-text: oklch(0.985 0 0);
+  --darker-hover-bg: oklch(0.145 0 0);
+  --darker-hover-text: oklch(0.985 0 0);
+  --darker-active-bg: oklch(0.145 0 0);
+  --darker-active-text: oklch(0.985 0 0);
+  --darker-border: oklch(0.205 0 0);
+  --darker-banner-bg: oklch(0.97 0 0);
+  --darker-light-bg: oklch(0.97 0 0);
+
+  // Status colors stay semantic (we keep distinct hues for success/warn/error)
+  // but desaturated to align with the brutalist monochrome aesthetic.
+  --success: oklch(0.55 0.12 145);
+  --success-text: oklch(0.985 0 0);
+  --success-hover-bg: oklch(0.45 0.12 145);
+  --success-hover-text: oklch(0.985 0 0);
+  --success-active-bg: oklch(0.4 0.12 145);
+  --success-active-text: oklch(0.985 0 0);
+  --success-border: oklch(0.55 0.12 145);
+  --success-banner-bg: oklch(0.97 0.02 145);
+  --success-light-bg: oklch(0.985 0.01 145);
+
+  --info: oklch(0.556 0 0);
+  --info-text: oklch(0.985 0 0);
+  --info-hover-bg: oklch(0.439 0 0);
+  --info-hover-text: oklch(0.985 0 0);
+  --info-active-bg: oklch(0.269 0 0);
+  --info-active-text: oklch(0.985 0 0);
+  --info-border: oklch(0.556 0 0);
+  --info-banner-bg: oklch(0.97 0 0);
+  --info-light-bg: oklch(0.985 0 0);
+
+  --warning: oklch(0.74 0.15 80);
+  --warning-text: oklch(0.145 0 0);
+  --warning-hover-bg: oklch(0.65 0.15 80);
+  --warning-hover-text: oklch(0.145 0 0);
+  --warning-active-bg: oklch(0.55 0.15 80);
+  --warning-active-text: oklch(0.985 0 0);
+  --warning-border: oklch(0.74 0.15 80);
+  --warning-banner-bg: oklch(0.97 0.03 80);
+  --warning-light-bg: oklch(0.985 0.02 80);
+
+  --error: oklch(0.577 0.245 27.325);
+  --error-text: oklch(0.985 0 0);
+  --error-hover-bg: oklch(0.5 0.22 27);
+  --error-hover-text: oklch(0.985 0 0);
+  --error-active-bg: oklch(0.42 0.18 27);
+  --error-active-text: oklch(0.985 0 0);
+  --error-border: oklch(0.577 0.245 27.325);
+  --error-banner-bg: oklch(0.97 0.04 27);
+  --error-light-bg: oklch(0.985 0.02 27);
+
+  --disabled: oklch(0.922 0 0);
+  --disabled-text: oklch(0.556 0 0);
+  --disabled-hover-bg: oklch(0.85 0 0);
+  --disabled-hover-text: oklch(0.556 0 0);
+  --disabled-active-bg: oklch(0.85 0 0);
+  --disabled-active-text: oklch(0.439 0 0);
+  --disabled-border: oklch(0.922 0 0);
+  --disabled-banner-bg: oklch(0.97 0 0);
+  --disabled-light-bg: oklch(0.985 0 0);
+  --disabled-bg: oklch(0.922 0 0);
+
+  // ---------- Layout chrome ----------
+  --body-bg: oklch(1 0 0);
+  --body-text: oklch(0.145 0 0);
+  --body-text-hover: oklch(0.145 0 0);
+  --body-border: oklch(0.922 0 0);
+
+  --banner-text-color: oklch(0.145 0 0);
+
+  --header-bg: oklch(0.985 0 0);
+  --header-btn-bg: transparent;
+  --header-btn-text: oklch(0.145 0 0);
+  --header-btn-text-hover: oklch(0.145 0 0);
+  --header-input-text: oklch(0.145 0 0);
+  --header-height: 52px;
+  --header-border: oklch(0.922 0 0);
+  --header-border-size: 1px;
+
+  --nav-width: 232px;
+  --nav-bg: oklch(0.985 0 0);
+  --nav-active: oklch(0.97 0 0);
+  --nav-hover: oklch(0.97 0 0);
+  --nav-active-hover: oklch(0.922 0 0);
+  --nav-hover-top-level: oklch(0.97 0 0);
+  --nav-expander-hover: oklch(0.922 0 0);
+  --nav-border: oklch(0.922 0 0);
+  --nav-border-size: 1px;
+  --nav-icon-badge-bg: oklch(0.985 0 0);
+
+  --topmenu-bg: oklch(0.985 0 0);
+  --topmenu-text: oklch(0.145 0 0);
+  --topmost-border: oklch(0.922 0 0);
+  --topmost-shadow: oklch(0.97 0 0);
+  --topmost-light-hover: oklch(0.97 0 0);
+
+  --footer-bg: transparent;
+  --footer-height: 0px;
+
+  --box-bg: oklch(0.985 0 0);
+  --subtle-border: oklch(0.922 0 0);
+  --bubble-bg: oklch(0.97 0 0);
+
+  --border-width: 1px;
+  --border-radius: 0.625rem;
+  --border-radius-md: calc(0.625rem - 2px);
+  --border-radius-lg: 0.625rem;
+
+  --outline: oklch(0.708 0 0);
+  --outline-width: 2px;
+
+  --accent-btn: oklch(0.97 0 0);
+  --accent-btn-hover: oklch(0.205 0 0);
+  --accent-btn-hover-text: oklch(0.985 0 0);
+
+  --modal-bg: oklch(1 0 0);
+  --modal-border: oklch(0.922 0 0);
+  --subtle-overlay-bg: oklch(0.97 0 0 / 0.75);
+  --overlay-bg: oklch(0.145 0 0 / 0.45);
+  --shadow: oklch(0.708 0 0 / 0.25);
+
+  --checkbox-tick: oklch(0.985 0 0);
+  --checkbox-border: oklch(0.708 0 0);
+  --checkbox-tick-disabled: oklch(0.708 0 0);
+  --checkbox-disabled-bg: oklch(0.922 0 0);
+  --checkbox-ticked-bg: oklch(0.205 0 0);
+
+  --drag-over-inner-bg: oklch(0.97 0 0 / 0.9);
+  --drag-over-outer-bg: oklch(0.97 0 0 / 0);
+
+  --dropdown-bg: oklch(1 0 0);
+  --dropdown-border: oklch(0.922 0 0);
+  --dropdown-divider: oklch(0.922 0 0);
+  --dropdown-text: oklch(0.145 0 0);
+  --dropdown-active-text: oklch(0.985 0 0);
+  --dropdown-active-bg: oklch(0.205 0 0);
+  --dropdown-hover-text: oklch(0.145 0 0);
+  --dropdown-hover-bg: oklch(0.97 0 0);
+  --dropdown-disabled-text: oklch(0.708 0 0);
+  --dropdown-disabled-bg: oklch(0.97 0 0);
+  --dropdown-group-text: oklch(0.556 0 0);
+  --dropdown-highlight-text: oklch(0.205 0 0);
+
+  --notification-unread-bg: oklch(0.97 0 0);
+  --card-badge-text: oklch(0.985 0 0);
+  --card-header: oklch(0.97 0 0);
+
+  // ---------- Inputs / forms ----------
+  --input-text: oklch(0.145 0 0);
+  --input-label: oklch(0.439 0 0);
+  --input-placeholder: oklch(0.708 0 0);
+  --input-border: oklch(0.922 0 0);
+  --input-bg: oklch(1 0 0);
+  --input-bg-accent: oklch(0.985 0 0);
+  --input-hover-bg: oklch(1 0 0);
+  --input-focus-bg: oklch(1 0 0);
+  --input-disabled-text: oklch(0.708 0 0);
+  --input-disabled-label: oklch(0.708 0 0);
+  --input-disabled-bg: oklch(0.97 0 0);
+  --input-disabled-border: oklch(0.922 0 0);
+  --input-disabled-placeholder: oklch(0.708 0 0);
+  --input-addon-bg: oklch(0.97 0 0);
+  --input-hover-border: oklch(0.708 0 0);
+
+  --label-secondary: oklch(0.439 0 0);
+
+  --progress-bg: oklch(0.922 0 0);
+  --progress-divider: oklch(0.922 0 0);
+
+  // ---------- Tables ----------
+  --sortable-table-bg: oklch(1 0 0);
+  --sortable-table-row-bg: oklch(1 0 0);
+  --sortable-table-header-bg: oklch(0.985 0 0);
+  --sortable-table-top-divider: oklch(0.922 0 0);
+  --sortable-table-body-divider: oklch(0.922 0 0);
+  --sortable-table-hover-bg: oklch(0.97 0 0);
+  --sortable-table-selected-bg: oklch(0.97 0 0);
+  --sortable-table-group-label: oklch(0.439 0 0);
+
+  --tag-primary: oklch(0.145 0 0);
+  --tag-bg: oklch(0.97 0 0);
+
+  // ---------- Popovers / tooltips ----------
+  --popover-bg: oklch(1 0 0);
+  --popover-border: oklch(0.922 0 0);
+  --popover-text: oklch(0.145 0 0);
+  --popover-border-radius: 0.625rem;
+  --tooltip-bg: oklch(0.145 0 0);
+  --tooltip-border: oklch(0.145 0 0);
+  --tooltip-text: oklch(0.985 0 0);
+  --tooltip-bg-warning: oklch(0.74 0.15 80 / 0.9);
+  --tooltip-text-warning: oklch(0.145 0 0);
+
+  --tabbed-border: oklch(0.922 0 0);
+  --tabbed-sidebar-bg: oklch(0.985 0 0);
+  --tabbed-container-bg: oklch(1 0 0);
+
+  --yaml-editor-bg: oklch(0.985 0 0);
+  --drawer-body-bg: oklch(0.985 0 0);
+
+  // ---------- Diff / logs / terminal ----------
+  --diff-border: oklch(0.922 0 0);
+  --diff-header-bg: oklch(0.985 0 0);
+  --diff-header-border: oklch(0.922 0 0);
+  --diff-header: oklch(0.439 0 0);
+  --diff-linenum-bg: oklch(0.985 0 0);
+  --diff-linenum: oklch(0.556 0 0);
+  --diff-linenum-border: oklch(0.922 0 0);
+  --diff-empty-placeholder: oklch(1 0 0);
+
+  --wm-tabs-bg: oklch(0.97 0 0);
+  --wm-tab-bg: oklch(0.985 0 0);
+  --wm-closer-hover-bg: oklch(0.922 0 0);
+  --wm-tab-active-bg: oklch(1 0 0);
+  --wm-title-bg: oklch(0.985 0 0);
+  --wm-title-border: oklch(0.922 0 0);
+  --wm-body-bg: oklch(0.985 0 0);
+  --wm-border: oklch(0.922 0 0);
+  --wm-tab-height: 28px;
+
+  --terminal-bg: oklch(1 0 0);
+  --terminal-cursor: oklch(0.205 0 0);
+  --terminal-selection: oklch(0.97 0 0);
+  --terminal-text: oklch(0.145 0 0);
+
+  --logs-bg: oklch(0.985 0 0);
+  --logs-highlight: oklch(0.985 0 0);
+  --logs-highlight-bg: oklch(0.74 0.15 80);
+  --logs-text: oklch(0.145 0 0);
+
+  // ---------- Gauges (neutralised) ----------
+  --gauge-divider: oklch(0.922 0 0);
+  --gauge-zero: oklch(0.922 0 0);
+
+  // App accents — Rancher accent → NQRust orange, partner stays neutral
+  --app-rancher-accent: #{$nq-brand};
+  --app-rancher-accent-text: #{$nq-brand-fg};
+  --app-partner-accent: oklch(0.439 0 0);
+  --app-partner-accent-text: oklch(0.985 0 0);
+
+  --product-icon: oklch(0.439 0 0);
+  --product-icon-active: oklch(0.145 0 0);
+
+  --badge-state-disabled-text: oklch(0.439 0 0);
+  --badge-state-disabled-bg: oklch(0.97 0 0);
+  --badge-state-disabled-border: oklch(0.922 0 0);
+
+  --gap: 8px;
+  --gap-md: 14px;
+  --gap-lg: 20px;
+
+  // Click-badge variants tightened to monochrome accents
+  --click-badge-error: oklch(0.985 0 0);
+  --click-badge-error-bg: oklch(0.577 0.245 27.325);
+  --click-badge-error-border: oklch(0.42 0.18 27);
+
+  --click-badge-warning: oklch(0.145 0 0);
+  --click-badge-warning-bg: oklch(0.74 0.15 80);
+  --click-badge-warning-border: oklch(0.55 0.15 80);
+
+  --click-badge-success: oklch(0.985 0 0);
+  --click-badge-success-bg: oklch(0.55 0.12 145);
+  --click-badge-success-border: oklch(0.45 0.12 145);
+
+  --click-badge-info: oklch(0.985 0 0);
+  --click-badge-info-bg: oklch(0.205 0 0);
+  --click-badge-info-border: oklch(0.145 0 0);
+
+  // Banner badges
+  --warning-badge: oklch(0.74 0.15 80);
+  --on-warning-banner: oklch(0.145 0 0);
+  --success-badge: oklch(0.55 0.12 145 / 0.1);
+  --on-success-banner: oklch(0.55 0.12 145);
+  --info-badge: oklch(0.205 0 0 / 0.1);
+  --on-info-banner: oklch(0.205 0 0);
+  --error-badge: oklch(0.577 0.245 27.325);
+  --on-error-banner: oklch(0.985 0 0);
+  --warning-banner-text: oklch(0.145 0 0);
+  --error-banner-text: oklch(0.145 0 0);
+
+  // rancher-components legacy tokens — neutralised
+  --rc-info: oklch(0.205 0 0);
+  --rc-info-secondary: oklch(0.97 0 0);
+  --rc-success: oklch(0.55 0.12 145);
+  --rc-success-secondary: oklch(0.985 0.01 145);
+  --rc-warning: oklch(0.74 0.15 80);
+  --rc-warning-secondary: oklch(0.985 0.02 80);
+  --rc-error: oklch(0.577 0.245 27.325);
+  --rc-error-secondary: oklch(0.985 0.02 27);
+  --rc-unknown: oklch(0.708 0 0);
+  --rc-unknown-secondary: oklch(0.97 0 0);
+  --rc-none: oklch(0.708 0 0);
+  --rc-none-secondary: oklch(0.97 0 0);
+  --rc-primary-hover: oklch(0.145 0 0);
+  --rc-active-background: oklch(0.97 0 0);
+  --rc-active-disabled-background: oklch(0.97 0 0);
+  --rc-active-border: oklch(0.922 0 0);
+  --rc-inactive-border: oklch(0.922 0 0);
+  --rc-inactive-background: oklch(0.97 0 0);
+  --rc-inactive-disabled-border: oklch(0.922 0 0);
+  --rc-disabled-background: oklch(0.97 0 0);
+  --rc-disabled-text-color: oklch(0.708 0 0);
+  --rc-image-bg: oklch(1 0 0);
+  --rc-image-color: oklch(0.145 0 0);
+  --rc-section-background-primary: oklch(1 0 0);
+  --rc-section-background-secondary: oklch(0.985 0 0);
+  --rc-section-action-color: oklch(0.205 0 0);
+}
+
+// -----------------------------------------------------------------------------
+// DARK
+// -----------------------------------------------------------------------------
+.dark,
+BODY.theme-dark,
+.theme-dark,
+.classic.theme-dark,
+.suse.theme-dark,
+.csp.theme-dark,
+.federal.theme-dark,
+.rgs.theme-dark,
+.harvester.theme-dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: #{$nq-brand};
+  --primary-foreground: #{$nq-brand-fg};
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.708 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.637 0.237 25.331);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: #{$nq-brand};
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: #{$nq-brand};
+  --sidebar-primary-foreground: #{$nq-brand-fg};
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: #{$nq-brand};
+
+  // Rancher legacy → NQRust dark + orange accent
+  --primary-text: #{$nq-brand-fg};
+  --primary-hover-bg: #{$nq-brand-hover};
+  --primary-hover-text: #{$nq-brand-fg};
+  --primary-active-bg: #{$nq-brand-active};
+  --primary-active-text: #{$nq-brand-fg};
+  --primary-border: #{$nq-brand};
+  --primary-banner-bg: oklch(0.3 0.06 38);
+  --primary-light-bg: oklch(0.25 0.04 38);
+  --primary-keyboard-focus: #{$nq-brand-hover};
+
+  --non-primary-hover: oklch(0.269 0 0);
+  --non-primary-text: #{$nq-brand};
+
+  --secondary-border: oklch(0.439 0 0);
+  --on-secondary: oklch(0.985 0 0);
+  --secondary-hover: oklch(0.269 0 0);
+
+  --tertiary: transparent;
+  --tertiary-header: transparent;
+  --tertiary-border: transparent;
+  --tertiary-header-hover: oklch(0.269 0 0);
+  --on-tertiary: oklch(0.985 0 0);
+  --on-tertiary-header: oklch(0.985 0 0);
+  --on-tertiary-header-hover: oklch(0.985 0 0);
+  --on-tertiary-hover: oklch(0.985 0 0);
+  --tertiary-hover: oklch(0.269 0 0);
+  --tertiary-hover-app-bar: oklch(0.985 0 0);
+
+  --link: #{$nq-brand};
+  --link-text: #{$nq-brand-fg};
+  --link-text-secondary: oklch(0.708 0 0);
+  --link-hover-bg: #{$nq-brand-hover};
+  --link-hover-text: #{$nq-brand-fg};
+  --link-active-bg: #{$nq-brand-active};
+  --link-active-text: #{$nq-brand-fg};
+  --link-border: #{$nq-brand};
+  --link-banner-bg: oklch(0.3 0.06 38);
+  --link-light-bg: oklch(0.25 0.04 38);
+
+  --active: #{$nq-brand};
+  --active-nav: #{$nq-brand};
+  --on-active: #{$nq-brand-fg};
+  --active-hover: #{$nq-brand-hover};
+  --category-active: oklch(0.3 0.06 38);
+  --category-active-hover: oklch(0.35 0.08 38);
+
+  --toggle-on-bg: #{$nq-brand};
+  --toggle-on-color: #{$nq-brand-fg};
+  --toggle-off-bg: oklch(0.269 0 0);
+  --toggle-off-color: oklch(0.708 0 0);
+  --toggle-off-hover: oklch(0.439 0 0);
+
+  --default: oklch(0.269 0 0);
+  --default-text: oklch(0.985 0 0);
+  --default-hover-bg: oklch(0.439 0 0);
+  --default-hover-text: oklch(0.985 0 0);
+  --default-active-bg: oklch(0.439 0 0);
+  --default-active-text: oklch(0.985 0 0);
+  --default-border: oklch(0.439 0 0);
+  --default-banner-bg: oklch(0.269 0 0);
+  --default-light-bg: oklch(0.205 0 0);
+
+  --muted: oklch(0.708 0 0);
+  --deemphasized: oklch(0.708 0 0);
+
+  --darker: oklch(0.269 0 0);
+  --darker-text: oklch(0.985 0 0);
+  --darker-hover-bg: oklch(0.439 0 0);
+  --darker-hover-text: oklch(0.985 0 0);
+  --darker-active-bg: oklch(0.439 0 0);
+  --darker-active-text: oklch(0.985 0 0);
+  --darker-border: oklch(0.439 0 0);
+  --darker-banner-bg: oklch(0.269 0 0);
+  --darker-light-bg: oklch(0.205 0 0);
+
+  --success: oklch(0.65 0.14 145);
+  --success-text: oklch(0.145 0 0);
+  --success-hover-bg: oklch(0.55 0.14 145);
+  --success-hover-text: oklch(0.985 0 0);
+  --success-active-bg: oklch(0.45 0.14 145);
+  --success-active-text: oklch(0.985 0 0);
+  --success-border: oklch(0.65 0.14 145);
+  --success-banner-bg: oklch(0.269 0.04 145);
+  --success-light-bg: oklch(0.205 0.02 145);
+
+  --info: oklch(0.708 0 0);
+  --info-text: oklch(0.145 0 0);
+  --info-hover-bg: oklch(0.556 0 0);
+  --info-hover-text: oklch(0.985 0 0);
+  --info-active-bg: oklch(0.439 0 0);
+  --info-active-text: oklch(0.985 0 0);
+  --info-border: oklch(0.708 0 0);
+  --info-banner-bg: oklch(0.269 0 0);
+  --info-light-bg: oklch(0.205 0 0);
+
+  --warning: oklch(0.78 0.16 80);
+  --warning-text: oklch(0.145 0 0);
+  --warning-hover-bg: oklch(0.7 0.16 80);
+  --warning-hover-text: oklch(0.145 0 0);
+  --warning-active-bg: oklch(0.6 0.16 80);
+  --warning-active-text: oklch(0.985 0 0);
+  --warning-border: oklch(0.78 0.16 80);
+  --warning-banner-bg: oklch(0.269 0.05 80);
+  --warning-light-bg: oklch(0.205 0.03 80);
+
+  --error: oklch(0.637 0.237 25.331);
+  --error-text: oklch(0.985 0 0);
+  --error-hover-bg: oklch(0.55 0.22 25);
+  --error-hover-text: oklch(0.985 0 0);
+  --error-active-bg: oklch(0.45 0.18 25);
+  --error-active-text: oklch(0.985 0 0);
+  --error-border: oklch(0.637 0.237 25.331);
+  --error-banner-bg: oklch(0.269 0.06 25);
+  --error-light-bg: oklch(0.205 0.04 25);
+
+  --disabled: oklch(0.269 0 0);
+  --disabled-text: oklch(0.439 0 0);
+  --disabled-hover-bg: oklch(0.269 0 0);
+  --disabled-hover-text: oklch(0.556 0 0);
+  --disabled-active-bg: oklch(0.269 0 0);
+  --disabled-active-text: oklch(0.556 0 0);
+  --disabled-border: oklch(0.269 0 0);
+  --disabled-banner-bg: oklch(0.205 0 0);
+  --disabled-light-bg: oklch(0.205 0 0);
+  --disabled-bg: oklch(0.269 0 0);
+
+  // Layout chrome
+  --body-bg: oklch(0.145 0 0);
+  --body-text: oklch(0.985 0 0);
+  --body-text-hover: oklch(0.985 0 0);
+  --body-border: oklch(0.269 0 0);
+
+  --banner-text-color: oklch(0.985 0 0);
+
+  --header-bg: oklch(0.145 0 0);
+  --header-btn-bg: transparent;
+  --header-btn-text: oklch(0.985 0 0);
+  --header-btn-text-hover: oklch(0.985 0 0);
+  --header-input-text: oklch(0.985 0 0);
+  --header-height: 52px;
+  --header-border: oklch(0.269 0 0);
+  --header-border-size: 1px;
+
+  --nav-width: 232px;
+  --nav-bg: oklch(0.205 0 0);
+  --nav-active: oklch(0.269 0 0);
+  --nav-hover: oklch(0.269 0 0);
+  --nav-active-hover: oklch(0.439 0 0);
+  --nav-hover-top-level: oklch(0.269 0 0);
+  --nav-expander-hover: oklch(0.269 0 0);
+  --nav-border: oklch(0.269 0 0);
+  --nav-border-size: 1px;
+  --nav-icon-badge-bg: oklch(0.269 0 0);
+
+  --topmenu-bg: oklch(0.205 0 0);
+  --topmenu-text: oklch(0.985 0 0);
+  --topmost-border: oklch(0.269 0 0);
+  --topmost-shadow: oklch(0 0 0 / 0.5);
+  --topmost-light-hover: oklch(0.269 0 0);
+
+  --footer-bg: transparent;
+  --footer-height: 0px;
+
+  --box-bg: oklch(0.205 0 0);
+  --subtle-border: oklch(0.269 0 0);
+  --bubble-bg: oklch(0.269 0 0);
+
+  --border-width: 1px;
+  --border-radius: 0.625rem;
+  --border-radius-md: calc(0.625rem - 2px);
+  --border-radius-lg: 0.625rem;
+
+  --outline: oklch(0.439 0 0);
+  --outline-width: 2px;
+
+  --accent-btn: oklch(0.269 0 0);
+  --accent-btn-hover: oklch(0.985 0 0);
+  --accent-btn-hover-text: oklch(0.205 0 0);
+
+  --modal-bg: oklch(0.145 0 0);
+  --modal-border: oklch(0.269 0 0);
+  --subtle-overlay-bg: oklch(0.145 0 0 / 0.75);
+  --overlay-bg: oklch(0 0 0 / 0.65);
+  --shadow: oklch(0 0 0 / 0.5);
+
+  --checkbox-tick: oklch(0.205 0 0);
+  --checkbox-border: oklch(0.439 0 0);
+  --checkbox-tick-disabled: oklch(0.439 0 0);
+  --checkbox-disabled-bg: oklch(0.269 0 0);
+  --checkbox-ticked-bg: oklch(0.985 0 0);
+
+  --drag-over-inner-bg: oklch(0.269 0 0 / 0.9);
+  --drag-over-outer-bg: oklch(0.269 0 0 / 0);
+
+  --dropdown-bg: oklch(0.205 0 0);
+  --dropdown-border: oklch(0.269 0 0);
+  --dropdown-divider: oklch(0.269 0 0);
+  --dropdown-text: oklch(0.985 0 0);
+  --dropdown-active-text: oklch(0.205 0 0);
+  --dropdown-active-bg: oklch(0.985 0 0);
+  --dropdown-hover-text: oklch(0.985 0 0);
+  --dropdown-hover-bg: oklch(0.269 0 0);
+  --dropdown-disabled-text: oklch(0.439 0 0);
+  --dropdown-disabled-bg: oklch(0.269 0 0);
+  --dropdown-group-text: oklch(0.708 0 0);
+  --dropdown-highlight-text: oklch(0.985 0 0);
+
+  --notification-unread-bg: oklch(0.269 0 0);
+  --card-badge-text: oklch(0.985 0 0);
+  --card-header: oklch(0.269 0 0);
+
+  --input-text: oklch(0.985 0 0);
+  --input-label: oklch(0.708 0 0);
+  --input-placeholder: oklch(0.439 0 0);
+  --input-border: oklch(0.269 0 0);
+  --input-bg: oklch(0.145 0 0);
+  --input-bg-accent: oklch(0.205 0 0);
+  --input-hover-bg: oklch(0.145 0 0);
+  --input-focus-bg: oklch(0.145 0 0);
+  --input-disabled-text: oklch(0.439 0 0);
+  --input-disabled-label: oklch(0.439 0 0);
+  --input-disabled-bg: oklch(0.205 0 0);
+  --input-disabled-border: oklch(0.269 0 0);
+  --input-disabled-placeholder: oklch(0.439 0 0);
+  --input-addon-bg: oklch(0.269 0 0);
+  --input-hover-border: oklch(0.439 0 0);
+
+  --label-secondary: oklch(0.708 0 0);
+
+  --progress-bg: oklch(0.269 0 0);
+  --progress-divider: oklch(0.439 0 0);
+
+  --sortable-table-bg: oklch(0.145 0 0);
+  --sortable-table-row-bg: oklch(0.145 0 0);
+  --sortable-table-header-bg: oklch(0.205 0 0);
+  --sortable-table-top-divider: oklch(0.269 0 0);
+  --sortable-table-body-divider: oklch(0.269 0 0);
+  --sortable-table-hover-bg: oklch(0.205 0 0);
+  --sortable-table-selected-bg: oklch(0.269 0 0);
+  --sortable-table-group-label: oklch(0.708 0 0);
+
+  --tag-primary: oklch(0.985 0 0);
+  --tag-bg: oklch(0.269 0 0);
+
+  --popover-bg: oklch(0.205 0 0);
+  --popover-border: oklch(0.269 0 0);
+  --popover-text: oklch(0.985 0 0);
+  --popover-border-radius: 0.625rem;
+  --tooltip-bg: oklch(0.985 0 0);
+  --tooltip-border: oklch(0.985 0 0);
+  --tooltip-text: oklch(0.205 0 0);
+  --tooltip-bg-warning: oklch(0.78 0.16 80 / 0.9);
+  --tooltip-text-warning: oklch(0.145 0 0);
+
+  --tabbed-border: oklch(0.269 0 0);
+  --tabbed-sidebar-bg: oklch(0.205 0 0);
+  --tabbed-container-bg: oklch(0.145 0 0);
+
+  --yaml-editor-bg: oklch(0.205 0 0);
+  --drawer-body-bg: oklch(0.205 0 0);
+
+  --diff-border: oklch(0.269 0 0);
+  --diff-header-bg: oklch(0.205 0 0);
+  --diff-header-border: oklch(0.269 0 0);
+  --diff-header: oklch(0.708 0 0);
+  --diff-linenum-bg: oklch(0.205 0 0);
+  --diff-linenum: oklch(0.708 0 0);
+  --diff-linenum-border: oklch(0.269 0 0);
+  --diff-empty-placeholder: oklch(0.145 0 0);
+
+  --wm-tabs-bg: oklch(0.205 0 0);
+  --wm-tab-bg: oklch(0.269 0 0);
+  --wm-closer-hover-bg: oklch(0.439 0 0);
+  --wm-tab-active-bg: oklch(0.145 0 0);
+  --wm-title-bg: oklch(0.205 0 0);
+  --wm-title-border: oklch(0.269 0 0);
+  --wm-body-bg: oklch(0.205 0 0);
+  --wm-border: oklch(0.269 0 0);
+  --wm-tab-height: 28px;
+
+  --terminal-bg: oklch(0.145 0 0);
+  --terminal-cursor: oklch(0.985 0 0);
+  --terminal-selection: oklch(0.269 0 0);
+  --terminal-text: oklch(0.985 0 0);
+
+  --logs-bg: oklch(0.205 0 0);
+  --logs-highlight: oklch(0.205 0 0);
+  --logs-highlight-bg: oklch(0.78 0.16 80);
+  --logs-text: oklch(0.985 0 0);
+
+  --gauge-divider: oklch(0.985 0 0 / 0.2);
+  --gauge-zero: oklch(0.269 0 0);
+
+  --app-rancher-accent: #{$nq-brand};
+  --app-rancher-accent-text: #{$nq-brand-fg};
+  --app-partner-accent: oklch(0.708 0 0);
+  --app-partner-accent-text: oklch(0.145 0 0);
+
+  --product-icon: oklch(0.708 0 0);
+  --product-icon-active: oklch(0.985 0 0);
+
+  --badge-state-disabled-text: oklch(0.708 0 0);
+  --badge-state-disabled-bg: oklch(0.269 0 0);
+  --badge-state-disabled-border: oklch(0.439 0 0);
+
+  --click-badge-error: oklch(0.985 0 0);
+  --click-badge-error-bg: oklch(0.637 0.237 25.331);
+  --click-badge-error-border: oklch(0.45 0.18 25);
+
+  --click-badge-warning: oklch(0.145 0 0);
+  --click-badge-warning-bg: oklch(0.78 0.16 80);
+  --click-badge-warning-border: oklch(0.6 0.16 80);
+
+  --click-badge-success: oklch(0.985 0 0);
+  --click-badge-success-bg: oklch(0.65 0.14 145);
+  --click-badge-success-border: oklch(0.45 0.14 145);
+
+  --click-badge-info: oklch(0.205 0 0);
+  --click-badge-info-bg: oklch(0.985 0 0);
+  --click-badge-info-border: oklch(0.708 0 0);
+
+  --warning-badge: oklch(0.78 0.16 80);
+  --on-warning-banner: oklch(0.145 0 0);
+  --success-badge: oklch(0.65 0.14 145 / 0.15);
+  --on-success-banner: oklch(0.65 0.14 145);
+  --info-badge: oklch(0.985 0 0 / 0.1);
+  --on-info-banner: oklch(0.985 0 0);
+  --error-badge: oklch(0.637 0.237 25.331);
+  --on-error-banner: oklch(0.985 0 0);
+  --error-banner-bg: oklch(0.269 0.06 25);
+  --warning-banner-text: oklch(0.985 0 0);
+  --error-banner-text: oklch(0.985 0 0);
+
+  --rc-info: oklch(0.985 0 0);
+  --rc-info-secondary: oklch(0.269 0 0);
+  --rc-success: oklch(0.65 0.14 145);
+  --rc-success-secondary: oklch(0.205 0.02 145);
+  --rc-warning: oklch(0.78 0.16 80);
+  --rc-warning-secondary: oklch(0.205 0.03 80);
+  --rc-error: oklch(0.637 0.237 25.331);
+  --rc-error-secondary: oklch(0.205 0.04 25);
+  --rc-unknown: oklch(0.439 0 0);
+  --rc-unknown-secondary: oklch(0.269 0 0);
+  --rc-none: oklch(0.439 0 0);
+  --rc-none-secondary: oklch(0.269 0 0);
+  --rc-primary-hover: oklch(0.922 0 0);
+  --rc-active-background: oklch(0.269 0 0);
+  --rc-active-disabled-background: oklch(0.269 0 0);
+  --rc-active-border: oklch(0.439 0 0);
+  --rc-inactive-border: oklch(0.439 0 0);
+  --rc-inactive-background: oklch(0.269 0 0);
+  --rc-inactive-disabled-border: oklch(0.439 0 0);
+  --rc-disabled-background: oklch(0.269 0 0);
+  --rc-disabled-text-color: oklch(0.439 0 0);
+  --rc-image-bg: oklch(0.985 0 0);
+  --rc-image-color: oklch(0.145 0 0);
+  --rc-section-background-primary: oklch(0.145 0 0);
+  --rc-section-background-secondary: oklch(0.205 0 0);
+  --rc-section-action-color: oklch(0.985 0 0);
+}
+
+// -----------------------------------------------------------------------------
+// Global brutalist polish — applied without specificity gymnastics
+// -----------------------------------------------------------------------------
+* {
+  // shadcn-style outline ring on focus-visible across the app
+  &:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+// Crisp 1px borders on the standard surface elements + flatten radius
+.card,
+.box,
+.simple-box,
+.banner,
+.tab,
+.modal,
+.popover,
+.tooltip {
+  border-radius: var(--radius) !important;
+}
+
+// Strip the chunky 5-wide spinner border in favour of a thin monochrome ring
+.initial-load-spinner {
+  border-color: var(--muted) !important;
+  border-top-color: var(--foreground) !important;
+}
+
+// Sidebar / navigation density tightening
+.side-nav,
+.top-level,
+.nav,
+nav.side-menu {
+  font-feature-settings: "ss01", "cv11";
+}
+
+// =============================================================================
+// PHASE 3 — Structural density polish (shadcn-flavored brutalism)
+// -----------------------------------------------------------------------------
+// All rules below are deliberately scoped to the rendered DOM classes that the
+// dashboard actually emits. Each rule sets values literally (px / rem) rather
+// than relying on the upstream SCSS-time constants ($btn-height: 40px, etc.)
+// which we can't reach from a runtime CSS layer.
+// =============================================================================
+
+// ---------- Buttons ----------
+.btn {
+  border-radius: var(--radius) !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.01em !important;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease !important;
+
+  &:not(.btn-sm):not(.btn-link):not(.btn-icon) {
+    min-height: 36px !important;
+    line-height: 34px !important;
+    padding: 0 14px !important;
+    font-size: 13px !important;
+  }
+
+  &.btn-sm {
+    min-height: 28px !important;
+    line-height: 26px !important;
+    padding: 0 10px !important;
+    font-size: 12px !important;
+  }
+
+  &.role-primary,
+  &.bg-primary,
+  &.bg-link {
+    background-color: var(--primary) !important;
+    color: var(--primary-text) !important;
+    border-color: var(--primary) !important;
+
+    &:hover:not(:disabled) {
+      background-color: var(--primary-hover-bg) !important;
+      color: var(--primary-hover-text) !important;
+      border-color: var(--primary-hover-bg) !important;
+    }
+  }
+
+  &.role-secondary,
+  &.bg-secondary {
+    background-color: transparent !important;
+    color: var(--foreground) !important;
+    border: 1px solid var(--border) !important;
+
+    &:hover:not(:disabled) {
+      background-color: var(--accent) !important;
+      border-color: var(--ring) !important;
+    }
+  }
+
+  &.role-tertiary {
+    background-color: transparent !important;
+    color: var(--foreground) !important;
+    border: 0 !important;
+
+    &:hover:not(:disabled) {
+      background-color: var(--accent) !important;
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ring) !important;
+    outline-offset: 2px !important;
+    box-shadow: none !important;
+  }
+}
+
+// ---------- Inputs / labeled inputs ----------
+.labeled-input,
+.unlabeled-input {
+  border-radius: var(--radius) !important;
+  border: 1px solid var(--input) !important;
+  background-color: var(--input-bg) !important;
+  min-height: 38px !important;
+  padding: 4px 12px !important;
+  transition: border-color 0.12s ease, box-shadow 0.12s ease !important;
+
+  & > LABEL,
+  & label {
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.04em !important;
+    text-transform: none !important;
+    color: var(--input-label) !important;
+    margin: 0 !important;
+    line-height: 1.2 !important;
+  }
+
+  & input,
+  & textarea {
+    font-size: 13px !important;
+    line-height: 1.4 !important;
+    color: var(--input-text) !important;
+    background: transparent !important;
+    border: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  &:hover:not(.disabled):not([disabled]) {
+    border-color: var(--ring) !important;
+  }
+
+  &.focused,
+  &:focus-within {
+    border-color: var(--ring) !important;
+    box-shadow: 0 0 0 2px oklch(0.685 0.196 38 / 0.3) !important;
+    outline: none !important;
+  }
+
+  &.compact-input {
+    min-height: 32px !important;
+    padding: 2px 10px !important;
+  }
+}
+
+input[type="text"],
+input[type="search"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="url"],
+textarea,
+select {
+  border-radius: var(--radius) !important;
+  border: 1px solid var(--input);
+  background-color: var(--input-bg);
+  color: var(--input-text);
+  font-size: 13px;
+
+  &:focus {
+    border-color: var(--ring) !important;
+    outline: none !important;
+    box-shadow: 0 0 0 2px oklch(0.685 0.196 38 / 0.3) !important;
+  }
+}
+
+// ---------- Tables ----------
+.sortable-table {
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  overflow: hidden;
+
+  THEAD,
+  thead {
+    tr,
+    TR {
+      background-color: var(--sortable-table-header-bg) !important;
+
+      th,
+      TH {
+        font-size: 11px !important;
+        font-weight: 600 !important;
+        letter-spacing: 0.04em !important;
+        text-transform: uppercase !important;
+        color: var(--muted-foreground) !important;
+        padding: 10px 14px !important;
+        border-bottom: 1px solid var(--border) !important;
+        border-top: 0 !important;
+      }
+    }
+  }
+
+  TBODY,
+  tbody {
+    tr,
+    TR {
+      &:hover {
+        background-color: var(--sortable-table-hover-bg) !important;
+      }
+
+      td,
+      TD {
+        padding: 10px 14px !important;
+        border-top: 1px solid var(--border) !important;
+        font-size: 13px !important;
+        line-height: 1.45 !important;
+        vertical-align: middle !important;
+      }
+
+      &:first-child td,
+      &:first-child TD {
+        border-top: 0 !important;
+      }
+    }
+  }
+}
+
+// ---------- Cards / boxes ----------
+.card-container,
+.box,
+.simple-box,
+.banner-graphic {
+  border-radius: var(--radius) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: none !important;
+}
+
+.card-container {
+  background-color: var(--card) !important;
+}
+
+// ---------- Sidebar / nav ----------
+// Don't override font-size, padding, or .label here. The upstream sidebar
+// already consumes our remapped --nav-bg / --nav-active / --nav-hover tokens
+// and overriding inner element styles breaks indentation + kills label text
+// because `.label` is the workhorse class for actual nav item names. We only
+// need to flatten the outer container chrome.
+.side-nav,
+nav.side-menu {
+  background-color: var(--sidebar) !important;
+  border-right: 1px solid var(--sidebar-border) !important;
+
+  .accordion {
+    border: 0 !important;
+  }
+}
+
+// ---------- Top app header ----------
+// Scoped tightly to the actual app shell <header> via data-testid. The bare
+// `.header` class is also used by Group.vue for sidebar group titles (33px),
+// so a generic match would force every nav group header to 52px, inflate the
+// sidebar past its container, and kill scroll. Don't widen this selector.
+header[data-testid="header"] {
+  background-color: var(--header-bg) !important;
+  border-bottom: 1px solid var(--header-border) !important;
+  height: var(--header-height, 52px) !important;
+  min-height: var(--header-height, 52px) !important;
+}
+
+// ---------- Tags / badges ----------
+.tag,
+.badge,
+.label-pill {
+  border-radius: 6px !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.01em !important;
+  padding: 2px 8px !important;
+  border: 1px solid var(--border) !important;
+}
+
+// ---------- Modals / drawers ----------
+.modal,
+.dialog,
+[role="dialog"] {
+  border-radius: var(--radius) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: 0 20px 48px -12px oklch(0 0 0 / 0.18), 0 4px 12px -4px oklch(0 0 0 / 0.12) !important;
+}
+
+// ---------- Tabs ----------
+.tabs,
+.tabbed {
+  .tab,
+  [role="tab"] {
+    border-radius: 0 !important;
+    padding: 8px 14px !important;
+    font-size: 13px !important;
+    border-bottom: 2px solid transparent !important;
+    transition: border-color 0.12s ease, color 0.12s ease !important;
+
+    &.active,
+    &[aria-selected="true"] {
+      border-bottom-color: var(--foreground) !important;
+      color: var(--foreground) !important;
+      background-color: transparent !important;
+    }
+  }
+}
+
+// ---------- Code editor / yaml ----------
+.code-mirror,
+.yaml-editor,
+.CodeMirror {
+  border-radius: var(--radius) !important;
+  border: 1px solid var(--border) !important;
+  background-color: var(--yaml-editor-bg) !important;
+  font-family: 'JetBrains Mono', 'SF Mono', 'Roboto Mono', Menlo, Consolas, monospace !important;
+  font-size: 12.5px !important;
+}
+
+// ---------- Banner padding density tightening ----------
+.banner {
+  padding: 10px 14px !important;
+  border-radius: var(--radius) !important;
+}
+
+// ---------- Home banner-graphic ----------
+// Mirror the login-landscape composition. The banner.svg already carries the
+// full design (logo + tagline + halo); the Vue overlay <h1> "Welcome to..."
+// double-stacks on top and clutters it. Hide the overlay; let the SVG speak.
+.banner-graphic-area {
+  --banner-graphic-height: 280px;
+
+  .graphic {
+    border-radius: var(--radius);
+
+    > img.banner {
+      object-fit: cover !important;
+      object-position: center center !important;
+    }
+  }
+
+  .title {
+    display: none !important;
+  }
+}
+
+// ---------- Body baseline ----------
+body,
+BODY {
+  font-feature-settings: "ss01", "cv11", "cv02";
+  font-variant-ligatures: contextual;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.005em;
+}
+
+// ---------- Selection ----------
+::selection {
+  background-color: var(--foreground);
+  color: var(--background);
+}
+
+// ---------- Scrollbar (Webkit) ----------
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--muted-foreground);
+  border-radius: 8px;
+  border: 2px solid var(--background);
+  &:hover {
+    background-color: var(--foreground);
+  }
+}

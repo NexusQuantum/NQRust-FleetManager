@@ -1,9 +1,24 @@
 {
-  "name": "dashboard",
-  "description": "Rancher Dashboard",
-  "repository": "https://github.com/rancher/dashboard",
+  "name": "nqrust-fleet-manager",
+  "description": "NQRust Fleet Manager — a monochrome, brutalist control plane for Kubernetes (UI fork of Rancher Dashboard).",
+  "homepage": "https://github.com/NexusQuantum/NQRust-FleetManager",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NexusQuantum/NQRust-FleetManager.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NexusQuantum/NQRust-FleetManager/issues"
+  },
   "license": "Apache-2.0",
-  "author": "SUSE",
+  "author": "NexusQuantum",
+  "keywords": [
+    "kubernetes",
+    "rancher",
+    "dashboard",
+    "fleet",
+    "vue",
+    "nqrust"
+  ],
   "private": true,
   "version": "0.0.0",
   "engines": {

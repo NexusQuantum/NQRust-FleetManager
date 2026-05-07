@@ -7,7 +7,7 @@ generic:
   userMenu: user menu
   actionMenu: action menu
   namespaceFilter: namespace filter menu
-  imageAlt: Generic Rancher image alt
+  imageAlt: Generic NQRust Fleet Manager image alt
   banners:
     altCloseBanner: Close banner icon
     bannerIcon: Banner icon
@@ -205,7 +205,7 @@ nav:
     productAboutPage: Product about page link
   alt:
     mainMenuIcon: Main menu icon
-    mainMenuRancherLogo: Main menu Rancher logo
+    mainMenuRancherLogo: Main menu NQRust Fleet Manager logo
     userAvatar: User avatar image
   expandCollapseAppBar: Expand/Collapse the Application Bar
   harvesterDashboard: Harvester Dashboard
@@ -337,7 +337,7 @@ product:
   monitoring: Monitoring
   neuvector: NeuVector
   harvesterManager: Virtualization Management
-  rancher: Rancher
+  rancher: NQRust Fleet Manager
   legacy: Legacy
   uiplugins: Extensions
   elemental: OS Management
@@ -394,7 +394,7 @@ about:
     cli: CLI
     helm: Helm
     machine: Machine
-    rancher: Rancher
+    rancher: NQRust Fleet Manager
     releaseNotes: 'View release notes'
   os:
     mac: macOS
@@ -4427,7 +4427,7 @@ neuvector:
 
 login:
   login: Login
-  howdy: Howdy!
+  howdy: Hello!
   welcome: Welcome to {vendor}
   landscapeAlt: Landscape image
   loggedOut: You have been logged out.
