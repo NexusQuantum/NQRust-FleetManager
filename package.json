@@ -200,7 +200,7 @@
     "csv-loader": "3.0.3",
     "cypress": "11.1.0",
     "cypress-axe": "1.6.0",
-    "cypress-delete-downloads-folder": "0.0.4",
+    "cypress-delete-downloads-folder": "0.0.6",
     "cypress-mochawesome-reporter": "3.8.2",
     "cypress-multi-reporters": "1.6.4",
     "cypress-qase-reporter": "3.0.0",
