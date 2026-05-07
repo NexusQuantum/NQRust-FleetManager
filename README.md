@@ -62,25 +62,106 @@ Point it at any Steve-API Kubernetes management backend and ship.
 
 ## Quick start
 
+A zero-to-running walkthrough. Takes ~10 minutes on a clean machine.
+
+### Prerequisites
+
+- **Node.js ≥ 24** — recommended via [`mise`](https://mise.jdx.dev/), [`nvm`](https://github.com/nvm-sh/nvm), or [`fnm`](https://github.com/Schniz/fnm)
+- **Yarn 1.22+** — install once globally via `npm install -g yarn`
+- **Docker** — for the local backend sandbox
+- A modern browser (Chromium-based or Firefox) that accepts self-signed TLS certs
+
+### 1. Clone and install
+
 ```bash
+git clone https://github.com/NexusQuantum/NQRust-FleetManager.git
+cd NQRust-FleetManager
 yarn install --frozen-lockfile
-API=https://your-management-server yarn dev
-# UI lives at https://127.0.0.1:8005
 ```
 
-For a local sandbox backend:
+The install pulls ~650 MB of `node_modules` and takes 3-5 minutes.
+
+### 2. Spin up a backend
+
+NQRust Fleet Manager is the UI only — it needs a Steve-API Kubernetes management server to talk to. The fastest way to get one locally is Docker:
 
 ```bash
 docker run -d --restart=unless-stopped \
   --name nqrust-backend --privileged \
   -p 127.0.0.1:80:80 -p 127.0.0.1:443:443 \
   rancher/rancher:latest
+```
 
-# Read the bootstrap password
+The container ships with bundled k3s and bootstraps in 1-3 minutes. Wait for the bootstrap password to appear in its logs:
+
+```bash
 docker logs nqrust-backend 2>&1 | grep "Bootstrap Password"
+# → 2026/05/08 ... [INFO] Bootstrap Password: <copy this>
+```
 
-# Then point the UI at it
+Verify the API is ready:
+
+```bash
+curl -k https://localhost/ping
+# → pong
+```
+
+### 3. Run the UI
+
+In a second terminal, point the dev server at the backend:
+
+```bash
 API=https://localhost yarn dev
+```
+
+Webpack compiles for ~30 seconds, then prints:
+
+```
+  App running at:
+  - Local:   https://localhost:8005/
+```
+
+### 4. First login
+
+Open **https://localhost:8005/** — accept the self-signed cert warning. On the login screen:
+
+- **Username:** `admin`
+- **Password:** the bootstrap password from step 2
+
+You'll be prompted to set a new password and accept the EULA on first login. After that you're in.
+
+### 5. Develop
+
+The dev server hot-reloads on every Vue / SCSS / TypeScript change. The reskin entry points are:
+
+- `shell/assets/styles/themes/_nqrust.scss` — theme tokens, density, layout overrides
+- `shell/assets/styles/themes/_nqrust-icons.scss` — Material Symbols icon mapping
+- `shell/assets/images/pl/` and `shell/assets/brand/suse/` — brand assets
+- `shell/config/private-label.js` — vendor / product name constants
+
+To pull future upstream improvements into the fork:
+
+```bash
+git fetch upstream
+git merge upstream/master
+```
+
+### Stop / cleanup
+
+```bash
+# Stop the dev server: Ctrl-C in its terminal
+# Stop the backend
+docker stop nqrust-backend && docker rm nqrust-backend
+# Or pause without removing
+docker stop nqrust-backend
+```
+
+### Pointing at an existing backend
+
+If you already have a Rancher-compatible server running somewhere, skip step 2 and substitute its URL into step 3:
+
+```bash
+API=https://your-rancher-server yarn dev
 ```
 
 ---
