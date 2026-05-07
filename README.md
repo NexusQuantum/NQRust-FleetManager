@@ -20,21 +20,6 @@ Self-hosted · Extension-ready · No vendor lock-in
 
 ---
 
-## What it is
-
-NQRust Fleet Manager is a Vue 3 / TypeScript user interface for operating fleets of Kubernetes clusters. It combines:
-
-- A neutral OKLCH grayscale palette with **`#FF621B`** as the brand accent
-- A shadcn-flavored density layer — 38 px inputs, 36 px buttons, 1 px borders, focus rings
-- Google Material Symbols Outlined for the entire icon set
-- The full NQRust brand identity in light + dark
-- A self-hosted, extension-ready Kubernetes management workflow
-- Composition API throughout, full Vuex state, full TypeScript
-
-Point it at any Steve-API Kubernetes management backend and ship.
-
----
-
 ## Showcase
 
 <table>
@@ -57,6 +42,21 @@ Point it at any Steve-API Kubernetes management backend and ship.
     <td align="center"><strong>Cluster</strong></td>
   </tr>
 </table>
+
+---
+
+## What it is
+
+NQRust Fleet Manager is a Vue 3 / TypeScript user interface for operating fleets of Kubernetes clusters. It combines:
+
+- A neutral OKLCH grayscale palette with **`#FF621B`** as the brand accent
+- A shadcn-flavored density layer — 38 px inputs, 36 px buttons, 1 px borders, focus rings
+- Google Material Symbols Outlined for the entire icon set
+- The full NQRust brand identity in light + dark
+- A self-hosted, extension-ready Kubernetes management workflow
+- Composition API throughout, full Vuex state, full TypeScript
+
+Point it at any Steve-API Kubernetes management backend and ship.
 
 ---
 
