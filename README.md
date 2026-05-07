@@ -4,7 +4,7 @@
 
 **A monochrome, brutalist control plane for Kubernetes — built on top of the [Rancher Dashboard](https://github.com/rancher/dashboard).**
 
-[![License](https://img.shields.io/badge/license-Apache%202.0-262626?style=flat-square)](./LICENSE)
+[![License](https://img.shields.io/badge/license-AGPL%20v3-262626?style=flat-square)](./LICENSE)
 [![Vue](https://img.shields.io/badge/Vue-3-262626?style=flat-square)](https://vuejs.org/)
 [![Made by NexusQuantum](https://img.shields.io/badge/made%20by-NexusQuantum-FF621B?style=flat-square)](https://github.com/NexusQuantum)
 
@@ -105,7 +105,7 @@ No backend bindings, Vuex stores, route definitions, API URLs, CRD references, o
 
 ## Attribution
 
-This project is a fork of [`rancher/dashboard`](https://github.com/rancher/dashboard) (Apache License 2.0, © Rancher Labs / SUSE). All upstream copyright notices remain in place. NQRust branding, theme system, and the customizations on top of the fork are © NexusQuantum, also released under Apache 2.0 — see [`NOTICE.md`](./NOTICE.md) for the breakdown.
+This project is a fork of [`rancher/dashboard`](https://github.com/rancher/dashboard) (Apache License 2.0, © Rancher Labs / SUSE). The upstream code remains under its original Apache 2.0 license — a copy is preserved as [`LICENSE-APACHE-2.0`](./LICENSE-APACHE-2.0) and all upstream copyright notices are intact. The combined work (NQRust branding, theme system, structural changes, plus the upstream code as integrated here) is distributed under the GNU Affero General Public License v3.0 — see [`NOTICE.md`](./NOTICE.md) for the breakdown.
 
 To pull future Rancher Dashboard updates into this fork:
 
@@ -119,4 +119,4 @@ git merge upstream/master
 
 ## License
 
-Apache License 2.0. See [`LICENSE`](./LICENSE).
+GNU Affero General Public License v3.0. See [`LICENSE`](./LICENSE). Upstream Apache 2.0 components are preserved under [`LICENSE-APACHE-2.0`](./LICENSE-APACHE-2.0).

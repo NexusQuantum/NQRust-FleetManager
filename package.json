@@ -9,7 +9,7 @@
   "bugs": {
     "url": "https://github.com/NexusQuantum/NQRust-FleetManager/issues"
   },
-  "license": "Apache-2.0",
+  "license": "AGPL-3.0-or-later",
   "author": "NexusQuantum",
   "keywords": [
     "kubernetes",
